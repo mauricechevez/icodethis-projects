@@ -8,7 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .result{
-            font-size: 3rem;
+            font-size: 5rem;
+        }
+        .result-label{
+            display: none;
         }
         .hint-text{
             color:rgb(191, 0, 0);
@@ -32,11 +35,11 @@
     <p class="text-xl mb-5">Enter a binary number and get its decimal equivalent</p>
     <form class="flex flex-col mb-5">
         <label for="binary-field">Binary Number</label>
-        <input type="number" id="binary-field" maxlength="8" class="h-10 border-solid border-2 rounded-md p-3">
+        <input autocomplete="off" type="number" id="binary-field" maxlength="8" class="h-10 border-solid border-2 rounded-md p-3">
         <span class="hint-text" id="hint-text"></span>
     </form>
     <div id="result-container">
-        <h2 class="result-label">Result</h2>
+        <h2 class="result-label">Decimal Number</h2>
         <span id="result" class="result"></span>
     </div>
 </body>

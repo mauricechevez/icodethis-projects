@@ -2,6 +2,8 @@
 const binaryValue = document.getElementById('binary-field');
 const result = document.getElementById('result');
 const hintText = document.getElementById('hint-text');
+const form = document.querySelector('form')
+const resultLabel = document.querySelector('.result-label')
 let validKey;
 let otherKey;
 const numberMap = [0,1];
@@ -20,8 +22,17 @@ function writeError(message){
     hintText.innerText = message;
 }
 
+// Do I still need this function?
 function clearResult(){
     result.innerText = "";
+}
+
+function labelVisibility(value){
+    if(!isNaN(parseInt(value))){
+        resultLabel.style.display = 'block'
+    } else {
+        resultLabel.style.display = 'none';
+    }
 }
 
 // Event listeners
@@ -30,6 +41,7 @@ binaryValue.addEventListener('keydown', e=>{
         return e.key <= n;
     })
     if(validKey == 0 || validKey == 1){
+        writeError('')
         return;
     } else if(e.key == "Backspace" || e.key == "Delete" || e.key =="ArrowRight" || e.key=="ArrowLeft"){
         otherKey = e.key;
@@ -41,12 +53,12 @@ binaryValue.addEventListener('keydown', e=>{
 })
 
 binaryValue.addEventListener('keyup',e =>{
-    // console.log(otherKey)
     if(validKey == 0 || validKey == 1){
         convertToDec(e.target.value)
-        writeError('')
+        labelVisibility(e.target.value)
     } else if (otherKey) {
         convertToDec(e.target.value)
+        labelVisibility(e.target.value)
         e.preventDefault()
     } else {
         console.log("Hit a non-acceptable key on keyboard")
@@ -63,35 +75,7 @@ binaryValue.addEventListener('keypress', e=>{
     }
 })
 
-
-// binaryValue.addEventListener('keyup', e=>{
-    
-//     if(e.key == 1 || e.key == 0){
-//         convertToDec(e.target.value);
-//         writeError('');
-//     } else if(e.key == "Backspace"){
-//         if(e.target.value ==" " || e.target.value == "" || e.target.value == null){
-//             clearResult();
-//             writeError('');
-//         } else {
-//             convertToDec(e.target.value);
-//         }
-//     } else {
-//         // alert('hey')
-//         writeError('Input must be either a 1 or 0');
-//         return false
-//     } 
-// })
-
-
-// binaryValue.addEventListener('keyup', e=>{
-//     console.log(e.key)
-//     console.log(e.key != 1)
-//     if(e.key != 1 || e.key != 0) {
-//         e.preventDefault();
-//         writeError('Input must be either a 1 or 0');
-//         console.warn('hello');
-//     } else {
-//         alert('huh?')
-//     }
-// })
+// Prevent accidental form submission:
+form.addEventListener('submit', e=>{
+    e.preventDefault();
+})
