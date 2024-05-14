@@ -3,10 +3,11 @@ const binaryValue = document.getElementById('binary-field');
 const result = document.getElementById('result');
 const hintText = document.getElementById('hint-text');
 const form = document.querySelector('form')
-const resultLabel = document.querySelector('.result-label')
+const resultLabel = document.querySelector('.result-label');
+const numberMap = [0,1];
 let validKey;
 let otherKey;
-const numberMap = [0,1];
+
 
 // Functions
 function convertToDec(num){
@@ -22,10 +23,6 @@ function writeError(message){
     hintText.innerText = message;
 }
 
-// Do I still need this function?
-function clearResult(){
-    result.innerText = "";
-}
 
 function labelVisibility(value){
     if(!isNaN(parseInt(value))){
